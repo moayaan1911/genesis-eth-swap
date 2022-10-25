@@ -1,8 +1,10 @@
 import { Grid, Row } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
-
+import "../../styles/Footer.module.css";
+import { Text } from "@nextui-org/react";
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <div
       style={{
@@ -25,12 +27,16 @@ const Footer = () => {
         <h3 style={{ marginBottom: "0" }}>About:-</h3>
         <p>
           {" "}
-          Genesis Swap is a <span className="spanned">FREE</span> and{" "}
-          <span>OPEN SOURCE</span> DeFi swap created by Mohammad Ayaan Siddiqui.
-          The website has been created using 0xProtocol, alchemy sdk, next.js
-          and nextUi. Here is a guide to use it:- 1) Install metamask extension
-          2) Connect to the wallet. 3) Select from token 4) Select to token 5)
-          Swap the tokens
+          Genesis Swap is a <span style={{ fontWeight: "bold" }}>
+            FREE
+          </span> and <span style={{ fontWeight: "bold" }}>OPEN SOURCE</span>{" "}
+          DeFi swap on ETH MAINNET. The website is a{" "}
+          <span style={{ fontWeight: "bold" }}> PRACTICE project</span> and
+          advised <span style={{ fontWeight: "bold" }}>NOT</span> to use for{" "}
+          <span style={{ fontWeight: "bold" }}>PROFESSIONAL PURPOSES.</span>{" "}
+          Here is a guide to use it:- 💠1) Install metamask extension. 💠2)
+          Connect to the wallet at ETHEREUM mainnet. 💠3) Select from and to
+          tokens. 💠4)Perform SWAP operation
         </p>
       </div>
       <div style={{ textAlign: "center", width: "25vw" }}>
@@ -71,7 +77,7 @@ const Footer = () => {
             <img src="twitter.png" alt="twitter" />
           </a>
         </Link>
-        <p style={{ fontSize: "12px" }}>Copyright ©️ 2022.</p>
+        <p style={{ fontSize: "12px" }}>Copyright ©️ {currentYear}.</p>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ import Erc20 from "../engine/erc20.json";
 import { ethers } from "ethers";
 import { Alchemy, Network } from "alchemy-sdk";
 import Image from "next/image";
+import Link from "next/link";
 require("dotenv").config();
 export default function Defiswap() {
   const { visible, setVisible } = useModal();
@@ -102,9 +103,10 @@ export default function Defiswap() {
     await connection.send("eth_requestAccounts");
     var accounts = await web3.eth.getAccounts();
     account = accounts[0];
-    document.getElementById("wallet-address").textContent = account;
+    document.getElementById("wallet-address").textContent =
+      "➡️" + account + "⬅️";
     if (account !== null) {
-      document.getElementById("status").textContent = "CONNECTED!";
+      document.getElementById("status").textContent = "CONNECTED!😃";
     } else {
       document.getElementById("status").textContent = "CONNECT";
     }
@@ -190,7 +192,26 @@ export default function Defiswap() {
   }
 
   async function listToTokens() {
-    let response = await fetch("http://localhost:3000/api/tokens");
+    let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
+    let tokenListJSON = await response.json();
+    var tokens = tokenListJSON.tokens;
+    let parent = document.getElementById("token_list");
+    for (const i in tokens) {
+      let div = document.createElement("div");
+      div.className = "token_row";
+      let html = `
+        <img className="token_list_img" width="12%" src="${tokens[i].logoURI}">
+        <span className="token_list_text">${tokens[i].name}</span>
+          `;
+      div.innerHTML = html;
+      div.onclick = () => {
+        selectTo(tokens[i]);
+      };
+      parent.appendChild(div);
+    }
+  }
+  async function listToSearch() {
+    let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
     let tokenListJSON = await response.json();
     var tokens = tokenListJSON.tokens;
     let parent = document.getElementById("token_list");
@@ -208,11 +229,10 @@ export default function Defiswap() {
       parent.appendChild(div);
     }
   }
-
   function selectTo(token) {
     toTrade[toSelectSide] = token;
     closeHandler();
-    var toName = token.name;
+    var toName = token.symbol;
     var toLogo = token.logoURI;
     var toAddr = token.address;
     var toDec = token.decimals;
@@ -330,28 +350,32 @@ export default function Defiswap() {
           id="status"
           className="connectTitle"
         >
-          CONNECT
+          CONNECT 🙇
         </Text>
       </Button>
       <Row justify="center">
         <Grid sm={4}>
           <Card variant="bordered">
             <Grid sm={4} justify="center" style={{ margin: "auto" }}>
-              <Button
-                size={"lg"}
-                style={{ marginRight: "2px" }}
-                shadow
-                css={{
-                  backgroundColor: "rgb(4, 104, 4)",
-                  boxShadow: "",
-                  "&:hover": {
-                    backgroundColor: "$black",
-                    boxShadow: "4px 4px #888888",
-                  },
-                }}
-              >
-                FEEDBACK FORM
-              </Button>
+              <Link href="https://forms.gle/iu7smRWnwu35XDEG6">
+                <a target={"_blank"}>
+                  <Button
+                    size={"lg"}
+                    style={{ marginRight: "2px" }}
+                    shadow
+                    css={{
+                      backgroundColor: "rgb(4, 104, 4)",
+                      boxShadow: "",
+                      "&:hover": {
+                        backgroundColor: "$black",
+                        boxShadow: "4px 4px #888888",
+                      },
+                    }}
+                  >
+                    FEEDBACK FORM 📃
+                  </Button>
+                </a>
+              </Link>
               <Button
                 size={"lg"}
                 style={{ marginLeft: "2px" }}
@@ -365,7 +389,7 @@ export default function Defiswap() {
                   },
                 }}
               >
-                GITHUB
+                GITHUB REPO . <i class="fa-brands fa-github"></i>
               </Button>
             </Grid>
             <Text
@@ -445,7 +469,7 @@ export default function Defiswap() {
                 }}
               >
                 <img src={flogo} style={{ width: "50px" }} />
-                {" " + fname}
+                {" " + fname} ⬇️
               </Text>
             </a>
             <Row justify="center">
@@ -539,7 +563,7 @@ export default function Defiswap() {
                 }}
               >
                 <img src={tlogo} style={{ width: "50px" }} />
-                {" " + tname}
+                {" " + tname} ⬆️
               </Text>
             </a>
           </Col>
@@ -564,7 +588,7 @@ export default function Defiswap() {
               weight="bold"
               transform="uppercase"
             >
-              SWAP !
+              SWAP 💵
             </Text>
           </Card>
         </Row>
@@ -573,7 +597,7 @@ export default function Defiswap() {
         <Grid sm={4}>
           <Row>
             <Text size={20} css={{ marginLeft: "$5" }}>
-              Gas Estimate:{" "}
+              Gas Estimate ⛽ :{" "}
             </Text>
             <p
               style={{
@@ -588,7 +612,7 @@ export default function Defiswap() {
           </Row>
           <Row>
             <Text size={24} css={{ marginLeft: "$5" }}>
-              LP Provider:{" "}
+              LP Provider 🎢:{" "}
             </Text>
             <p
               style={{
@@ -602,7 +626,7 @@ export default function Defiswap() {
           </Row>
         </Grid>
       </Row>
-      <Grid sm={4}>
+      <Grid sm={5}>
         <Card
           css={{
             backgroundColor: "Black",
