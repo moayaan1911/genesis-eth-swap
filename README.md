@@ -7,7 +7,7 @@
 ## PREVIEW
 
 <img  src="public/genesis.png" alt="preview" align="left" width="500">
-<img src="public/genesis1.png" alt="preview" align="right" width="500">
+<img src="public/genesis1.png" alt="preview" align="right" width="200">
 <img src="public/genesis2.png" alt="preview"  width="200">
 <img src="public/genesis3.png" alt="preview" width="200">
 
