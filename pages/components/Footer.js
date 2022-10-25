@@ -34,9 +34,7 @@ const Footer = () => {
           <span style={{ fontWeight: "bold" }}> PRACTICE project</span> and
           advised <span style={{ fontWeight: "bold" }}>NOT</span> to use for{" "}
           <span style={{ fontWeight: "bold" }}>PROFESSIONAL PURPOSES.</span>{" "}
-          Here is a guide to use to site:- 💠Install Metamask 💠Connect to ETH
-          MAINNET 💠Select FROM and TO tokens 💠Perform Swap. 📌For video demo,
-          click{" "}
+          📌For video demo on how to use it, click{" "}
           <Link href="https://www.loom.com/share/33e15b0d2bdf42ea98bcc1a3330fcf76">
             <a
               target={"_blank"}
