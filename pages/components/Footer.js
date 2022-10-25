@@ -23,7 +23,7 @@ const Footer = () => {
         gap: "20px",
       }}
     >
-      <div style={{ marginLeft: "20px", width: "70vw" }}>
+      <div style={{ marginLeft: "20px", width: "75vw" }}>
         <h3 style={{ marginBottom: "0" }}>About:-</h3>
         <p>
           {" "}
@@ -34,9 +34,17 @@ const Footer = () => {
           <span style={{ fontWeight: "bold" }}> PRACTICE project</span> and
           advised <span style={{ fontWeight: "bold" }}>NOT</span> to use for{" "}
           <span style={{ fontWeight: "bold" }}>PROFESSIONAL PURPOSES.</span>{" "}
-          Here is a guide to use it:- 💠1) Install metamask extension. 💠2)
-          Connect to the wallet at ETHEREUM mainnet. 💠3) Select from and to
-          tokens. 💠4)Perform SWAP operation
+          Here is a guide to use to site:- 💠Install Metamask 💠Connect to ETH
+          MAINNET 💠Select FROM and TO tokens 💠Perform Swap. 📌For video demo,
+          click{" "}
+          <Link href="https://www.loom.com/share/33e15b0d2bdf42ea98bcc1a3330fcf76">
+            <a
+              target={"_blank"}
+              style={{ color: "white", textDecoration: "underline" }}
+            >
+              HERE
+            </a>
+          </Link>
         </p>
       </div>
       <div style={{ textAlign: "center", width: "25vw" }}>

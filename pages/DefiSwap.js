@@ -168,26 +168,27 @@ export default function Defiswap() {
     getFromDec(fromDec);
   }
 
-  async function displayBalance() {
-    const tokenContractAddresses = [faddr];
-    const data = await alchemy.core.getTokenBalances(
-      wallet,
-      tokenContractAddresses
-    );
-    data.tokenBalances.find((item) => {
-      let rawbalance = parseInt(item.tokenBalance, 16).toString();
-      let formatbalance = Number(Web3.utils.fromWei(rawbalance));
-      let balance = formatbalance.toFixed(2);
-      if (
-        item.tokenBalance ===
-        "0x0000000000000000000000000000000000000000000000000000000000000000"
-      ) {
-        document.getElementById("get_balance").innerHTML = "0.00";
-      } else {
-        document.getElementById("get_balance").innerHTML = balance;
-      }
-    });
-  }
+  // async function displayBalance() {
+  //   const tokenContractAddresses = [faddr];
+  //   const data = await alchemy.core.getTokenBalances(
+  //     wallet,
+  //     tokenContractAddresses
+  //   );
+  //   console.log(data);
+  //   data.tokenBalances.find((item) => {
+  //     let rawbalance = parseInt(item.tokenBalance, 16).toString();
+  //     let formatbalance = Number(Web3.utils.fromWei(rawbalance));
+  //     let balance = formatbalance.toFixed(2);
+  //     if (
+  //       item.tokenBalance ===
+  //       "0x0000000000000000000000000000000000000000000000000000000000000000"
+  //     ) {
+  //       document.getElementById("get_balance").innerHTML = "0.00";
+  //     } else {
+  //       document.getElementById("get_balance").innerHTML = balance;
+  //     }
+  //   });
+  // }
 
   async function listToTokens() {
     let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
@@ -219,7 +220,7 @@ export default function Defiswap() {
     getToLogo(toLogo);
     getToAddr(toAddr);
     getToDec(toDec);
-    displayBalance();
+    // displayBalance();
   }
   async function getPrice() {
     console.log("Getting Price");
@@ -355,21 +356,25 @@ export default function Defiswap() {
                   </Button>
                 </a>
               </Link>
-              <Button
-                size={"lg"}
-                style={{ marginLeft: "2px" }}
-                shadow
-                css={{
-                  backgroundColor: "rgb(4, 104, 4)",
-                  boxShadow: "",
-                  "&:hover": {
-                    backgroundColor: "$black",
-                    boxShadow: "4px 4px #888888",
-                  },
-                }}
-              >
-                GITHUB REPO . <i class="fa-brands fa-github"></i>
-              </Button>
+              <Link href="https://github.com/moayaan1911/genesis-eth-swap">
+                <a target="_blank">
+                  <Button
+                    size={"lg"}
+                    style={{ marginLeft: "2px" }}
+                    shadow
+                    css={{
+                      backgroundColor: "rgb(4, 104, 4)",
+                      boxShadow: "",
+                      "&:hover": {
+                        backgroundColor: "$black",
+                        boxShadow: "4px 4px #888888",
+                      },
+                    }}
+                  >
+                    GITHUB REPO . <i class="fa-brands fa-github"></i>
+                  </Button>
+                </a>
+              </Link>
             </Grid>
             <Text
               h2={true}
@@ -451,7 +456,7 @@ export default function Defiswap() {
                 {" " + fname} ⬇️
               </Text>
             </a>
-            <Row justify="center">
+            {/* <Row justify="center">
               <Text css={{ marginLeft: "$3", fontSize: "$lg" }}>Balance:</Text>
               <Text
                 css={{
@@ -462,7 +467,7 @@ export default function Defiswap() {
                 }}
                 id="get_balance"
               ></Text>
-            </Row>
+            </Row> */}
           </Col>
         </Grid>
       </Row>
