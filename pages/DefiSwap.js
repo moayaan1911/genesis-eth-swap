@@ -35,6 +35,7 @@ export default function Defiswap() {
   const [holdup, setHold] = useState("");
   const [wallet, getWallet] = useState([]);
   const [alert, setAlert] = useState(false);
+  const [fromTo, setTo] = useState(false);
   const [contractAddress, setContractAddress] = useState("");
   const config = {
     apiKey: process.env.AlchemyAPI,
@@ -66,22 +67,15 @@ export default function Defiswap() {
   const fromHandler = (side) => {
     if (wallet.includes("0x")) {
       setVisible(true);
+      setTo(false);
       currentSelectSide = side;
       listFromTokens();
     } else {
       sendAlert();
     }
   };
-  const fromSearch = (side) => {
-    if (wallet.includes("0x")) {
-      setVisible(true);
-      currentSelectSide = side;
-      listFromSearch();
-    } else {
-      sendAlert();
-    }
-  };
   const toHandler = (side) => {
+    setTo(true);
     setVisible(true);
     toSelectSide = side;
     listToTokens();
@@ -149,7 +143,11 @@ export default function Defiswap() {
               `;
         div.innerHTML = html;
         div.onclick = () => {
-          selectFrom(tokens[i]);
+          if (fromTo == false) {
+            selectFrom(tokens[i]);
+          } else if (fromTo == true) {
+            selectTo(tokens[i]);
+          }
         };
         parent.innerHTML = html;
         parent.appendChild(div);
@@ -202,25 +200,6 @@ export default function Defiswap() {
       let html = `
         <img className="token_list_img" width="12%" src="${tokens[i].logoURI}">
         <span className="token_list_text">${tokens[i].name}</span>
-          `;
-      div.innerHTML = html;
-      div.onclick = () => {
-        selectTo(tokens[i]);
-      };
-      parent.appendChild(div);
-    }
-  }
-  async function listToSearch() {
-    let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
-    let tokenListJSON = await response.json();
-    var tokens = tokenListJSON.tokens;
-    let parent = document.getElementById("token_list");
-    for (const i in tokens) {
-      let div = document.createElement("div");
-      div.className = "token_row";
-      let html = `
-        <img className="token_list_img" width="12%" src="${tokens[i].logoURI}">
-        <span className="token_list_text">${tokens[i].symbol}</span>
           `;
       div.innerHTML = html;
       div.onclick = () => {
