@@ -104,12 +104,7 @@ export default function Defiswap() {
   }
 
   async function listFromTokens() {
-    let response = await fetch("http://localhost:3000/api/tokens");
-    let response2 = await fetch(
-      "https://tokens.coingecko.com/uniswap/all.json"
-    );
-    const data2 = response2.json();
-    console.log(data2);
+    let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
     let tokenListJSON = await response.json();
     var tokens = tokenListJSON.tokens;
     let parent = document.getElementById("token_list");
@@ -445,17 +440,20 @@ export default function Defiswap() {
         open={visible}
       >
         <Modal.Body>
-          <Input
-            type="text"
-            size="$3xl"
-            css={{ fontFamily: "SF Pro Display", color: "white" }}
-            className="number"
-            color="default"
-            placeholder="Paste Token Address"
-            onChange={(e) => setContractAddress(e.target.value)}
-          />
+          <Grid>
+            <Input
+              type="text"
+              size="$3xl"
+              css={{ fontFamily: "SF Pro Display", color: "white" }}
+              className="number"
+              color="default"
+              placeholder="Paste Token Address"
+              onChange={(e) => setContractAddress(e.target.value)}
+            />
+            <Button size={"xs"}>Search</Button>
+          </Grid>
           <Text size={16}>Or Choose Below:</Text>
-          <div id="token_list"></div>
+          <div id="token_list" style={{ cursor: "pointer" }}></div>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onClick={closeHandler}>
