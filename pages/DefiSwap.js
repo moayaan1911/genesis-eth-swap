@@ -19,7 +19,7 @@ import qs from "qs";
 import Erc20 from "../engine/erc20.json";
 import { ethers } from "ethers";
 import { Alchemy, Network } from "alchemy-sdk";
-// import "./DefiSwap.css";
+import Image from "next/image";
 require("dotenv").config();
 export default function Defiswap() {
   const { visible, setVisible } = useModal();
@@ -34,7 +34,6 @@ export default function Defiswap() {
   const [holdup, setHold] = useState("");
   const [wallet, getWallet] = useState([]);
   const [alert, setAlert] = useState(false);
-
   const config = {
     apiKey: process.env.AlchemyAPI,
     network: Network.ETH_MAINNET,
@@ -105,6 +104,11 @@ export default function Defiswap() {
 
   async function listFromTokens() {
     let response = await fetch("http://localhost:3000/api/tokens");
+    let response2 = await fetch(
+      "https://tokens.coingecko.com/uniswap/all.json"
+    );
+    const data2 = response2.json();
+    console.log(data2);
     let tokenListJSON = await response.json();
     var tokens = tokenListJSON.tokens;
     let parent = document.getElementById("token_list");
@@ -158,7 +162,7 @@ export default function Defiswap() {
   }
 
   async function listToTokens() {
-    let response = await fetch("http://10.10.20.38:3000/api/tokens");
+    let response = await fetch("http://localhost:3000/api/tokens");
     let tokenListJSON = await response.json();
     var tokens = tokenListJSON.tokens;
     let parent = document.getElementById("token_list");
@@ -267,12 +271,28 @@ export default function Defiswap() {
   }
 
   return (
-    <Grid.Container gap={1} justify="center">
+    <Grid.Container
+      gap={1}
+      justify="center"
+      css={{ margin: "auto", paddingTop: "20px" }}
+    >
       <Button
         rounded
-        color="primary"
         onPress={connect}
-        style={{ marginTop: "25px", marginBottom: "10px" }}
+        style={{
+          marginTop: "25px",
+          marginBottom: "10px",
+        }}
+        className="connectButton"
+        shadow
+        css={{
+          backgroundColor: "rgb(4, 104, 4)",
+          boxShadow: "",
+          "&:hover": {
+            backgroundColor: "$black",
+            boxShadow: "-4px 4px #888888",
+          },
+        }}
       >
         <Text
           css={{ color: "white" }}
@@ -280,6 +300,7 @@ export default function Defiswap() {
           weight="bold"
           transform="uppercase"
           id="status"
+          className="connectTitle"
         >
           CONNECT
         </Text>
@@ -287,17 +308,49 @@ export default function Defiswap() {
       <Row justify="center">
         <Grid sm={4}>
           <Card variant="bordered">
+            <Grid sm={4} justify="center" style={{ margin: "auto" }}>
+              <Button
+                size={"lg"}
+                style={{ marginRight: "2px" }}
+                shadow
+                css={{
+                  backgroundColor: "rgb(4, 104, 4)",
+                  boxShadow: "",
+                  "&:hover": {
+                    backgroundColor: "$black",
+                    boxShadow: "4px 4px #888888",
+                  },
+                }}
+              >
+                FEEDBACK FORM
+              </Button>
+              <Button
+                size={"lg"}
+                style={{ marginLeft: "2px" }}
+                shadow
+                css={{
+                  backgroundColor: "rgb(4, 104, 4)",
+                  boxShadow: "",
+                  "&:hover": {
+                    backgroundColor: "$black",
+                    boxShadow: "4px 4px #888888",
+                  },
+                }}
+              >
+                GITHUB
+              </Button>
+            </Grid>
             <Text
-              h3={true}
-              color="white"
+              h2={true}
               css={{
-                textShadow: "0px 0px 1px #000000",
                 display: "flex",
                 justifyContent: "center",
                 textRendering: "geometricPrecision",
                 fontFamily: "SF Pro Display",
-                fontWeight: "$bold",
+                fontWeight: "$extrabold",
                 m: "$0",
+                color: "$green800",
+                fontSize: "$4xl",
               }}
             >
               Genesis Swap
@@ -313,7 +366,6 @@ export default function Defiswap() {
         onClose={closeHandler}
         open={alert}
       >
-        {" "}
         Please Connect Wallet
         <Modal.Footer>
           <Button auto flat color="primary" onClick={connect}>
@@ -324,7 +376,7 @@ export default function Defiswap() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Text h5="true">FROM TOKEN</Text>
+      <Text h5="true">Select a token</Text>
       <Row justify="center">
         <Grid sm={4}>
           <Col>
@@ -360,9 +412,7 @@ export default function Defiswap() {
                 size="$3xl"
                 css={{
                   fontFamily: "SF Pro Display",
-                  textShadow: "0px 0px 1px #000000",
                   fontWeight: "400",
-                  color: "white",
                   ml: "$10",
                 }}
               >
@@ -412,19 +462,17 @@ export default function Defiswap() {
         </Modal.Footer>
       </Modal>
       <Row justify="center">
-        <img src="arrow.png" width={"2%"} />
+        <img src="arrow.png" width={"4%"} style={{ marginBottom: "20px" }} />
       </Row>
       <Row justify="center">
         <Grid sm={4}>
           <Card
             variant="bordered"
             css={{
-              color: "white",
               opacity: "80%",
               fontFamily: "SF Pro Display",
               fontWeight: "300",
               fontSize: "30px",
-              textShadow: "0px 0px 2px #000000",
               boxShadow: "0px 0px 4px #39FF14",
             }}
           >
@@ -434,12 +482,12 @@ export default function Defiswap() {
                 size="$4xl"
                 css={{
                   fontFamily: "SF Pro Display",
-                  color: "white",
+                  color: "black",
                   textShadow: "0px 0px 3px #39FF14",
                   ml: "$2",
                 }}
                 className="number"
-                color="default"
+                color="black"
                 id="to_amount"
               />
             </Col>
@@ -451,9 +499,7 @@ export default function Defiswap() {
                 size="$3xl"
                 css={{
                   fontFamily: "SF Pro Display",
-                  textShadow: "0px 0px 1px #000000",
                   fontWeight: "400",
-                  color: "white",
                   ml: "$10",
                 }}
               >
@@ -468,7 +514,7 @@ export default function Defiswap() {
         <Row justify="center">
           <Card
             isPressable
-            css={{ backgroundColor: "#39FF14" }}
+            css={{ backgroundColor: "rgb(4, 104, 4)" }}
             onPress={swapit}
           >
             <Text
@@ -477,6 +523,7 @@ export default function Defiswap() {
                 justifyContent: "center",
                 color: "black",
                 textShadow: "0px 0px 2px #000000",
+                color: "white",
               }}
               size="$3xl"
               weight="bold"
@@ -490,7 +537,7 @@ export default function Defiswap() {
       <Row justify="center">
         <Grid sm={4}>
           <Row>
-            <Text size={20} css={{ marginLeft: "$5", color: "white" }}>
+            <Text size={20} css={{ marginLeft: "$5" }}>
               Gas Estimate:{" "}
             </Text>
             <p
@@ -498,15 +545,14 @@ export default function Defiswap() {
                 fontFamily: "SF Pro Display",
                 fontSize: "24px",
                 marginLeft: "4px",
-                color: "#39FF14",
+                color: "black",
                 fontWeight: "bold",
-                textShadow: "0px 0px 1px #000000",
               }}
               id="gas_estimate"
             ></p>
           </Row>
           <Row>
-            <Text size={24} css={{ marginLeft: "$5", color: "white" }}>
+            <Text size={24} css={{ marginLeft: "$5" }}>
               LP Provider:{" "}
             </Text>
             <p
@@ -514,24 +560,33 @@ export default function Defiswap() {
                 fontFamily: "SF Pro Display",
                 fontSize: "25px",
                 marginLeft: "4px",
-                color: "#39FF14",
                 fontWeight: "bold",
-                textShadow: "0px 0px 1px #000000",
               }}
               id="defisource"
             ></p>
           </Row>
         </Grid>
       </Row>
-      <Text
-        size={20}
-        id="wallet-address"
-        css={{
-          color: "#39FF14",
-          textShadow: "0px 0px 3px #000000",
-          marginRight: "$2",
-        }}
-      />
+      <Grid sm={4}>
+        <Card
+          css={{
+            backgroundColor: "Black",
+            margin: "auto",
+            justify: "center",
+          }}
+        >
+          <Text
+            size={20}
+            id="wallet-address"
+            css={{
+              marginRight: "$2",
+              color: "$green200",
+              margin: "auto",
+              padding: "2px",
+            }}
+          />
+        </Card>
+      </Grid>
     </Grid.Container>
   );
 }

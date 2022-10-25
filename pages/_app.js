@@ -1,14 +1,13 @@
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import DefiSwap from "./DefiSwap";
-import "./DefiSwap.css";
+import "../styles/globals.css";
+import Footer from "./components/Footer";
 function MyApp({ Component, pageProps }) {
-  const dark = createTheme({
-    type: "dark",
-  });
   return (
-    <NextUIProvider theme={dark}>
+    <NextUIProvider>
       <Component {...pageProps} />
       <DefiSwap />
+      <Footer />
     </NextUIProvider>
   );
 }
