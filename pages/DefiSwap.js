@@ -71,7 +71,15 @@ export default function Defiswap() {
       sendAlert();
     }
   };
-
+  const fromSearch = (side) => {
+    if (wallet.includes("0x")) {
+      setVisible(true);
+      currentSelectSide = side;
+      listFromSearch();
+    } else {
+      sendAlert();
+    }
+  };
   const toHandler = (side) => {
     setVisible(true);
     toSelectSide = side;
@@ -113,7 +121,7 @@ export default function Defiswap() {
       div.className = "token_row";
       let html = `
           <img className="token_list_img" width="12%" src="${tokens[i].logoURI}">
-            <span className="token_list_text">${tokens[i].symbol}</span>
+            <span className="token_list_text">${tokens[i].name}</span>
             `;
       div.innerHTML = html;
       div.onclick = () => {
@@ -123,10 +131,34 @@ export default function Defiswap() {
     }
   }
 
+  async function listFromSearch() {
+    let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
+    let tokenListJSON = await response.json();
+    var tokens = tokenListJSON.tokens;
+    let parent = document.getElementById("token_list");
+    for (const i in tokens) {
+      var name = tokens[i].name.toLowerCase();
+      if (name == contractAddress) {
+        let div = document.createElement("div");
+        div.className = "token_row";
+        let html = `
+            <img className="token_list_img" width="12%" src="${tokens[i].logoURI}">
+              <span className="token_list_text">${tokens[i].name}</span>
+              `;
+        div.innerHTML = html;
+        div.onclick = () => {
+          selectFrom(tokens[i]);
+        };
+        parent.innerHTML = html;
+        parent.appendChild(div);
+      }
+    }
+  }
+
   function selectFrom(token) {
     currentTrade[currentSelectSide] = token;
     closeHandler();
-    var fromName = token.name;
+    var fromName = token.symbol;
     var fromLogo = token.logoURI;
     var fromAddr = token.address;
     var fromDec = token.decimals;
@@ -449,8 +481,11 @@ export default function Defiswap() {
               color="default"
               placeholder="Paste Token Address"
               onChange={(e) => setContractAddress(e.target.value)}
+              value={contractAddress}
             />
-            <Button size={"xs"}>Search</Button>
+            <Button size={"xs"} onPress={listFromSearch}>
+              Search
+            </Button>
           </Grid>
           <Text size={16}>Or Choose Below:</Text>
           <div id="token_list" style={{ cursor: "pointer" }}></div>
