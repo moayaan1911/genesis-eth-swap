@@ -34,6 +34,7 @@ export default function Defiswap() {
   const [holdup, setHold] = useState("");
   const [wallet, getWallet] = useState([]);
   const [alert, setAlert] = useState(false);
+  const [contractAddress, setContractAddress] = useState("");
   const config = {
     apiKey: process.env.AlchemyAPI,
     network: Network.ETH_MAINNET,
@@ -451,6 +452,7 @@ export default function Defiswap() {
             className="number"
             color="default"
             placeholder="Paste Token Address"
+            onChange={(e) => setContractAddress(e.target.value)}
           />
           <Text size={16}>Or Choose Below:</Text>
           <div id="token_list"></div>
