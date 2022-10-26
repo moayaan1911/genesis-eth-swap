@@ -443,7 +443,7 @@ export default function Defiswap() {
           <Col>
             <a onClick={fromHandler}>
               <Text
-                size="$3xl"
+                size="$2xl"
                 css={{
                   fontFamily: "SF Pro Display",
                   fontWeight: "400",
@@ -537,7 +537,7 @@ export default function Defiswap() {
           <Col>
             <a onClick={toHandler}>
               <Text
-                size="$3xl"
+                size="$2xl"
                 css={{
                   fontFamily: "SF Pro Display",
                   fontWeight: "400",
