@@ -308,7 +308,7 @@ export default function Defiswap() {
         rounded
         onPress={connect}
         style={{
-          marginTop: "25px",
+          marginTop: "15px",
           marginBottom: "10px",
         }}
         className="connectButton"
@@ -340,7 +340,6 @@ export default function Defiswap() {
               <Link href="https://forms.gle/iu7smRWnwu35XDEG6">
                 <a target={"_blank"}>
                   <Button
-                    size={"lg"}
                     style={{ marginRight: "2px" }}
                     shadow
                     css={{
@@ -359,7 +358,6 @@ export default function Defiswap() {
               <Link href="https://github.com/moayaan1911/genesis-eth-swap">
                 <a target="_blank">
                   <Button
-                    size={"lg"}
                     style={{ marginLeft: "2px" }}
                     shadow
                     css={{
@@ -487,7 +485,7 @@ export default function Defiswap() {
               css={{ fontFamily: "SF Pro Display", color: "white" }}
               className="number"
               color="default"
-              placeholder="Paste Token Address"
+              placeholder="Search by Name"
               onChange={(e) => setContractAddress(e.target.value)}
               value={contractAddress}
             />
@@ -505,7 +503,7 @@ export default function Defiswap() {
         </Modal.Footer>
       </Modal>
       <Row justify="center">
-        <img src="arrow.png" width={"4%"} style={{ marginBottom: "20px" }} />
+        <img src="arrow.png" width={"3%"} />
       </Row>
       <Row justify="center">
         <Grid sm={4}>
