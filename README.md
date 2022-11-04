@@ -15,7 +15,7 @@
 
 ## Video DEMO:-
 
-[Video Demo of Genesis Swap App](https://www.loom.com/share/33e15b0d2bdf42ea98bcc1a3330fcf76)
+[Video Demo of Genesis Swap App](https://www.youtube.com/watch?v=8LMMBJbQgbs)
 
 ---
 
