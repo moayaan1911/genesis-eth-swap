@@ -35,7 +35,7 @@ const Footer = () => {
           advised <span style={{ fontWeight: "bold" }}>NOT</span> to use for{" "}
           <span style={{ fontWeight: "bold" }}>PROFESSIONAL PURPOSES.</span>{" "}
           📌For video demo on how to use it, click{" "}
-          <Link href="https://www.loom.com/share/33e15b0d2bdf42ea98bcc1a3330fcf76">
+          <Link href="https://www.youtube.com/watch?v=8LMMBJbQgbs">
             <a
               target={"_blank"}
               style={{ color: "white", textDecoration: "underline" }}
