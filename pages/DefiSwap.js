@@ -168,28 +168,6 @@ export default function Defiswap() {
     getFromDec(fromDec);
   }
 
-  // async function displayBalance() {
-  //   const tokenContractAddresses = [faddr];
-  //   const data = await alchemy.core.getTokenBalances(
-  //     wallet,
-  //     tokenContractAddresses
-  //   );
-  //   console.log(data);
-  //   data.tokenBalances.find((item) => {
-  //     let rawbalance = parseInt(item.tokenBalance, 16).toString();
-  //     let formatbalance = Number(Web3.utils.fromWei(rawbalance));
-  //     let balance = formatbalance.toFixed(2);
-  //     if (
-  //       item.tokenBalance ===
-  //       "0x0000000000000000000000000000000000000000000000000000000000000000"
-  //     ) {
-  //       document.getElementById("get_balance").innerHTML = "0.00";
-  //     } else {
-  //       document.getElementById("get_balance").innerHTML = balance;
-  //     }
-  //   });
-  // }
-
   async function listToTokens() {
     let response = await fetch("https://tokens.coingecko.com/uniswap/all.json");
     let tokenListJSON = await response.json();

@@ -1,6 +1,6 @@
 # GENESIS SWAP
 
-**Deployment Link:-https://genesis-swap.vercel.app/**
+**Deployment Link:-https://genesis-eth-swap.vercel.app/**
 
 ---
 
